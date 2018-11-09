@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hacker News - Search</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src='https://unpkg.com/babel-standalone@6/babel.min.js'></script>
+    <link rel="icon" sizes="32x32" href="https://alligator.io/assets/img/favicon-32x32.png">
+    <link rel="icon" sizes="192x192" href="https://alligator.io/assets/img/touch-icon-192x192.png">
+</head>
+<body>
+<div id='app'></div>
+
+<script type='text/babel'>
+
+    var server = "http://hn.algolia.com/api/v1/search?query=";
+    var DEFAULT_QUERY = "reactJS";
+
+
+    function NewsList (props)
+    {
+        if (props.results == null){
+            return (<div></div>);
+        }
+        else{
+            //Iterate over results.list.map.title
+            return (
+                <div>
+                    {
+                        props.results.hits.map((currentResult)=> {
+                            if ((currentResult.title !== null && currentResult.title !== "")) {
+                                return (<div key={currentResult.objectID}>
+                                            <a href={currentResult.url}>
+                                                {currentResult.title}
+                                            </a>
+                                    </div>)
+
+                            }
+                        })
+                    }
+                </div>);
+        }
+    }
+
+    class DrawHackerNews extends React.Component {
+
+        //let apiResult = {"hits":[{"created_at":"2016-03-01T17:47:09.000Z","title":"Free React.js Fundamentals Course","url":"http://courses.reactjsprogram.com/courses/reactjsfundamentals","author":"tm33","points":676,"story_text":null,"comment_text":null,"num_comments":112,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1456854429,"_tags":["story","author_tm33","story_11204481"],"objectID":"11204481","_highlightResult":{"title":{"value":"Free \u003cem\u003eReact.js\u003c/em\u003e Fundamentals Course","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"http://courses.\u003cem\u003ereactjs\u003c/em\u003eprogram.com/courses/\u003cem\u003ereactjs\u003c/em\u003efundamentals","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"author":{"value":"tm33","matchLevel":"none","matchedWords":[]}}},{"created_at":"2015-07-09T09:03:49.000Z","title":"React.js Introduction for People Who Know Just Enough JQuery","url":"http://reactfordesigners.com/labs/reactjs-introduction-for-people-who-know-just-enough-jquery-to-get-by/","author":"chibicode","points":614,"story_text":null,"comment_text":null,"num_comments":230,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1436432629,"_tags":["story","author_chibicode","story_9856855"],"objectID":"9856855","_highlightResult":{"title":{"value":"\u003cem\u003eReact.js\u003c/em\u003e Introduction for People Who Know Just Enough JQuery","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"http://reactfordesigners.com/labs/\u003cem\u003ereactjs\u003c/em\u003e-introduction-for-people-who-know-just-enough-jquery-to-get-by/","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"author":{"value":"chibicode","matchLevel":"none","matchedWords":[]}}},{"created_at":"2015-01-28T18:25:03.000Z","title":"Use ReactJS to Build Native Apps","url":"https://twitter.com/floydophone/status/560503411389390848","author":"andyl","points":466,"story_text":"","comment_text":null,"num_comments":166,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1422469503,"_tags":["story","author_andyl","story_8961551"],"objectID":"8961551","_highlightResult":{"title":{"value":"Use \u003cem\u003eReactJS\u003c/em\u003e to Build Native Apps","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"https://twitter.com/floydophone/status/560503411389390848","matchLevel":"none","matchedWords":[]},"author":{"value":"andyl","matchLevel":"none","matchedWords":[]},"story_text":{"value":"","matchLevel":"none","matchedWords":[]}}},{"created_at":"2016-10-12T13:25:04.000Z","title":"Facebook React.js License","url":"http://www.elcaminolegal.com/single-post/2016/10/04/Facebook-Reactjs-License","author":"maxsavin","points":461,"story_text":null,"comment_text":null,"num_comments":194,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1476278704,"_tags":["story","author_maxsavin","story_12692552"],"objectID":"12692552","_highlightResult":{"title":{"value":"Facebook \u003cem\u003eReact.js\u003c/em\u003e License","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"http://www.elcaminolegal.com/single-post/2016/10/04/Facebook-\u003cem\u003eReactjs\u003c/em\u003e-License","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"author":{"value":"maxsavin","matchLevel":"none","matchedWords":[]}}},{"created_at":"2016-01-24T15:41:41.000Z","title":"Things every React.js beginner should know","url":"https://camjackson.net/post/9-things-every-reactjs-beginner-should-know","author":"Scriptor","points":412,"story_text":null,"comment_text":null,"num_comments":237,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1453650101,"_tags":["story","author_Scriptor","story_10962784"],"objectID":"10962784","_highlightResult":{"title":{"value":"Things every \u003cem\u003eReact.js\u003c/em\u003e beginner should know","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"https://camjackson.net/post/9-things-every-\u003cem\u003ereactjs\u003c/em\u003e-beginner-should-know","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"author":{"value":"Scriptor","matchLevel":"none","matchedWords":[]}}},{"created_at":"2015-06-01T13:22:54.000Z","title":"Is ReactJS really fast?","url":"http://blog.500tech.com/is-reactjs-fast/","author":"Murkin","points":409,"story_text":null,"comment_text":null,"num_comments":186,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1433164974,"_tags":["story","author_Murkin","story_9638305"],"objectID":"9638305","_highlightResult":{"title":{"value":"Is \u003cem\u003eReactJS\u003c/em\u003e really fast?","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"http://blog.500tech.com/is-\u003cem\u003ereactjs\u003c/em\u003e-fast/","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"author":{"value":"Murkin","matchLevel":"none","matchedWords":[]}}},{"created_at":"2016-09-20T06:43:32.000Z","title":"If TypeScript is so great, how come all notable ReactJS projects use Babel?","url":"https://discuss.reactjs.org/t/if-typescript-is-so-great-how-come-all-notable-reactjs-projects-use-babel/4887/2?u=spicyj","author":"stuartmemo","points":373,"story_text":null,"comment_text":null,"num_comments":235,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1474353812,"_tags":["story","author_stuartmemo","story_12537614"],"objectID":"12537614","_highlightResult":{"title":{"value":"If TypeScript is so great, how come all notable \u003cem\u003eReactJS\u003c/em\u003e projects use Babel?","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"https://discuss.\u003cem\u003ereactjs\u003c/em\u003e.org/t/if-typescript-is-so-great-how-come-all-notable-\u003cem\u003ereactjs\u003c/em\u003e-projects-use-babel/4887/2?u=spicyj","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"author":{"value":"stuartmemo","matchLevel":"none","matchedWords":[]}}},{"created_at":"2017-10-27T12:29:08.000Z","title":"Netflix: Removing client-side React.js improved performance by 50%","url":"https://twitter.com/NetflixUIE/status/923374215041912833","author":"pjmlp","points":357,"story_text":null,"comment_text":null,"num_comments":163,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1509107348,"_tags":["story","author_pjmlp","story_15567657"],"objectID":"15567657","_highlightResult":{"title":{"value":"Netflix: Removing client-side \u003cem\u003eReact.js\u003c/em\u003e improved performance by 50%","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"https://twitter.com/NetflixUIE/status/923374215041912833","matchLevel":"none","matchedWords":[]},"author":{"value":"pjmlp","matchLevel":"none","matchedWords":[]}}},{"created_at":"2017-07-03T21:08:02.000Z","title":"Show HN: Under the hood ReactJS","url":"https://bogdan-lyashenko.github.io/Under-the-hood-ReactJS/","author":"bliashenko","points":266,"story_text":null,"comment_text":null,"num_comments":117,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1499116082,"_tags":["story","author_bliashenko","story_14691407","show_hn"],"objectID":"14691407","_highlightResult":{"title":{"value":"Show HN: Under the hood \u003cem\u003eReactJS\u003c/em\u003e","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"https://bogdan-lyashenko.github.io/Under-the-hood-\u003cem\u003eReactJS\u003c/em\u003e/","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"author":{"value":"bliashenko","matchLevel":"none","matchedWords":[]}}},{"created_at":"2016-09-07T10:06:09.000Z","title":"Show HN: Build your first real world React.js application","url":"http://academy.plot.ly/#react","author":"mxstbr","points":261,"story_text":null,"comment_text":null,"num_comments":44,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1473242769,"_tags":["story","author_mxstbr","story_12442026","show_hn"],"objectID":"12442026","_highlightResult":{"title":{"value":"Show HN: Build your first real world \u003cem\u003eReact.js\u003c/em\u003e application","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"http://academy.plot.ly/#react","matchLevel":"none","matchedWords":[]},"author":{"value":"mxstbr","matchLevel":"none","matchedWords":[]}}},{"created_at":"2017-11-18T04:54:49.000Z","title":"How Facebook's Instagram Acquisition Led to the Open Sourcing of React.js","url":"https://stackshare.io/posts/the-react-story","author":"fagnerbrack","points":256,"story_text":null,"comment_text":null,"num_comments":76,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1510980889,"_tags":["story","author_fagnerbrack","story_15727823"],"objectID":"15727823","_highlightResult":{"title":{"value":"How Facebook's Instagram Acquisition Led to the Open Sourcing of \u003cem\u003eReact.js\u003c/em\u003e","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"https://stackshare.io/posts/the-react-story","matchLevel":"none","matchedWords":[]},"author":{"value":"fagnerbrack","matchLevel":"none","matchedWords":[]}}},{"created_at":"2015-05-09T03:36:53.000Z","title":"React JS Best Practices","url":"http://blog.siftscience.com/blog/2015/react-applications-that-scale","author":"lopatin","points":252,"story_text":null,"comment_text":null,"num_comments":89,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1431142613,"_tags":["story","author_lopatin","story_9515392"],"objectID":"9515392","_highlightResult":{"title":{"value":"\u003cem\u003eReact JS\u003c/em\u003e Best Practices","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"http://blog.siftscience.com/blog/2015/react-applications-that-scale","matchLevel":"none","matchedWords":[]},"author":{"value":"lopatin","matchLevel":"none","matchedWords":[]}}},{"created_at":"2016-12-06T18:00:02.000Z","title":"Show HN: Victory – ReactJS library for building interactive data visualizations","url":"https://github.com/FormidableLabs/victory","author":"thekenwheeler","points":220,"story_text":null,"comment_text":null,"num_comments":29,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1481047202,"_tags":["story","author_thekenwheeler","story_13116727","show_hn"],"objectID":"13116727","_highlightResult":{"title":{"value":"Show HN: Victory – \u003cem\u003eReactJS\u003c/em\u003e library for building interactive data visualizations","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"https://github.com/FormidableLabs/victory","matchLevel":"none","matchedWords":[]},"author":{"value":"thekenwheeler","matchLevel":"none","matchedWords":[]}}},{"created_at":"2016-08-22T17:34:48.000Z","title":"Make Dope Beats with ReactJS","url":"https://formidable.com/blog/2016/08/22/make-dope-beats-with-reactjs/","author":"thekenwheeler","points":216,"story_text":null,"comment_text":null,"num_comments":45,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1471887288,"_tags":["story","author_thekenwheeler","story_12337936"],"objectID":"12337936","_highlightResult":{"title":{"value":"Make Dope Beats with \u003cem\u003eReactJS\u003c/em\u003e","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"https://formidable.com/blog/2016/08/22/make-dope-beats-with-\u003cem\u003ereactjs\u003c/em\u003e/","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"author":{"value":"thekenwheeler","matchLevel":"none","matchedWords":[]}}},{"created_at":"2014-05-05T13:25:25.000Z","title":"The Case for React.js and ClojureScript","url":"http://murilopereira.com/the-case-for-reactjs-and-clojurescript","author":"mpereira","points":176,"story_text":"","comment_text":null,"num_comments":90,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1399296325,"_tags":["story","author_mpereira","story_7698403"],"objectID":"7698403","_highlightResult":{"title":{"value":"The Case for \u003cem\u003eReact.js\u003c/em\u003e and ClojureScript","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"http://murilopereira.com/the-case-for-\u003cem\u003ereactjs\u003c/em\u003e-and-clojurescript","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"author":{"value":"mpereira","matchLevel":"none","matchedWords":[]},"story_text":{"value":"","matchLevel":"none","matchedWords":[]}}},{"created_at":"2016-02-22T17:35:02.000Z","title":"React.js Conf live stream [video]","url":"https://www.youtube.com/watch?v=pi62S_MvheE","author":"tilt","points":167,"story_text":null,"comment_text":null,"num_comments":80,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1456162502,"_tags":["story","author_tilt","story_11152587"],"objectID":"11152587","_highlightResult":{"title":{"value":"\u003cem\u003eReact.js\u003c/em\u003e Conf live stream [video]","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"https://www.youtube.com/watch?v=pi62S_MvheE","matchLevel":"none","matchedWords":[]},"author":{"value":"tilt","matchLevel":"none","matchedWords":[]}}},{"created_at":"2015-06-29T14:15:46.000Z","title":"React.js koans","url":"https://github.com/arkency/reactjs_koans","author":"andrzejkrzywda","points":160,"story_text":"","comment_text":null,"num_comments":30,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1435587346,"_tags":["story","author_andrzejkrzywda","story_9798177"],"objectID":"9798177","_highlightResult":{"title":{"value":"\u003cem\u003eReact.js\u003c/em\u003e koans","matchLevel":"full","fullyHighlighted":true,"matchedWords":["reactjs"]},"url":{"value":"https://github.com/arkency/\u003cem\u003ereactjs\u003c/em\u003e_koans","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"author":{"value":"andrzejkrzywda","matchLevel":"none","matchedWords":[]},"story_text":{"value":"","matchLevel":"none","matchedWords":[]}}},{"created_at":"2015-12-26T16:52:55.000Z","title":"React-boilerplate: setup for performance orientated, offline-first React.js apps","url":"https://github.com/mxstbr/react-boilerplate","author":"tilt","points":154,"story_text":null,"comment_text":null,"num_comments":61,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1451148775,"_tags":["story","author_tilt","story_10794502"],"objectID":"10794502","_highlightResult":{"title":{"value":"React-boilerplate: setup for performance orientated, offline-first \u003cem\u003eReact.js\u003c/em\u003e apps","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"https://github.com/mxstbr/react-boilerplate","matchLevel":"none","matchedWords":[]},"author":{"value":"tilt","matchLevel":"none","matchedWords":[]}}},{"created_at":"2014-08-30T18:52:10.000Z","title":"A React.js case study","url":"http://blog.krawaller.se/posts/a-react-js-case-study/","author":"xngzng","points":153,"story_text":null,"comment_text":null,"num_comments":41,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1409424730,"_tags":["story","author_xngzng","story_8247223"],"objectID":"8247223","_highlightResult":{"title":{"value":"A \u003cem\u003eReact.js\u003c/em\u003e case study","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"http://blog.krawaller.se/posts/a-react-js-case-study/","matchLevel":"none","matchedWords":[]},"author":{"value":"xngzng","matchLevel":"none","matchedWords":[]}}},{"created_at":"2015-08-24T07:51:25.000Z","title":"Elemental UI for React.js","url":"http://elemental-ui.com/","author":"jamesknelson","points":148,"story_text":"","comment_text":null,"num_comments":46,"story_id":null,"story_title":null,"story_url":null,"parent_id":null,"created_at_i":1440402685,"_tags":["story","author_jamesknelson","story_10108472"],"objectID":"10108472","_highlightResult":{"title":{"value":"Elemental UI for \u003cem\u003eReact.js\u003c/em\u003e","matchLevel":"full","fullyHighlighted":false,"matchedWords":["reactjs"]},"url":{"value":"http://elemental-ui.com/","matchLevel":"none","matchedWords":[]},"author":{"value":"jamesknelson","matchLevel":"none","matchedWords":[]},"story_text":{"value":"","matchLevel":"none","matchedWords":[]}}}],"nbHits":5358,"page":0,"nbPages":50,"hitsPerPage":20,"processingTimeMS":6,"exhaustiveNbHits":true,"query":"reactJS","params":"advancedSyntax=true\u0026analytics=false\u0026query=reactJS"};
+
+
+        constructor (props){
+
+            super(props)
+
+            this.state = {
+                result: null,
+                searchTerm: DEFAULT_QUERY,
+            };
+
+            this.searchHackerNews = this.searchHackerNews.bind(this);
+        }
+
+        searchHackerNews (){
+            let searchTerm = document.getElementById("hnq").value
+            console.log("Searching for : "+searchTerm);
+            let url = server + searchTerm;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    this.setState({
+                        result: data
+                    })
+
+
+                })
+                .catch(err => console.error(err))
+
+        }
+
+        render () {
+            return (
+                <div align="center">
+                    <br/>
+                    <img src="https://d33wubrfki0l68.cloudfront.net/4e5626a0b7db6b84c0b51f1c0cfd56490fc19b74/7a5ad/images/logo-fancy.svg" alt="Welcome to Alligator.io"/>
+                    <h1>Search Hacker News</h1>
+                    <input id="hnq" name="hnq" type="text" placeholder="Search Hacker News" onChange={this.searchHackerNews}/>
+                    <button onClick={this.searchHackerNews}>Search</button>
+
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <NewsList results={this.state.result}/>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <DrawHackerNews/>,
+        document.getElementById("app"));
+
+</script>
+</body>
+</html>
+
+<!--
+<img
+    src="https://d33wubrfki0l68.cloudfront.net/ca0061c3c33c88b2b124e64ad341e15e2a17af49/c8765/images/alligator-logo3.svg"
+    width="80" height="80" alt="Alligator.io home" className="alligator-logo"/>
+-->
